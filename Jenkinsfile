@@ -7,8 +7,8 @@ pipeline {
             }
         }
         stage('Build && SonarQube Test') {
+            scannerHome = tool 'SonarQube'
             steps {
-                scannerHome = tool 'SonarQube'
                 withSonarQubeEnv('SonarQube') {
                     sh "${scannerHome}/bin/sonar-runner"
                 }
