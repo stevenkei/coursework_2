@@ -1,4 +1,4 @@
- pipeline {
+pipeline {
     agent any
     stages {
         stage('SCM') {
@@ -6,12 +6,14 @@
                 git url: 'https://github.com/stevenkei/coursework_2.git'
             }
         }
-        stage('Build && SonarQube Test') {
+          stage('SonarQube analysis') {
             steps {
-             def scannerHome = tool 'sonarScanner';
-             withSonarQubeEnv('SonarQube 6.2') {
-             bat "${scannerHome}/bin/sonar-scanner.bat"
-            }
+                def scannerHome = tool 'SonarScanner';
+                 withSonarQubeEnv('SonarQube') {
+                  bat "${scannerHome}/bin/sonar-scanner.bat"
+                 }
+              }
+           }
         }
         stage("Quality Gate") {
             steps {
