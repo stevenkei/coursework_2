@@ -1,7 +1,5 @@
-pipeline {
-    agent any 
-    stages {
-        stage('SCM') {
+node {
+  stage('SCM') {
     git 'https://github.com/stevenkei/coursework_2.git'
   }
   stage('SonarQube analysis') {
