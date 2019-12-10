@@ -5,15 +5,14 @@
             steps {
                 git url: 'https://github.com/stevenkei/coursework_2.git'
             }
-        }
-        stage('Build && SonarQube Test')  {
-    def scannerHome = tool 'SonarScanner';
-    withSonarQubeEnv('SonarQube') { // If you have configured more than one global server connection, you can specify its name
-      sh "${scannerHome}/bin/sonar-scanner"
-                    }
-                }
+       stage("build & SonarQube analysis") {
+            agent any
+            steps {
+              withSonarQubeEnv('SonarQube') {
+                sh 'mvn clean package sonar:sonar'
+              }
             }
-        }
+          }
         stage("Quality Gate") {
             steps {
                 timeout(time: 1, unit: 'HOURS') {
