@@ -8,8 +8,7 @@
         }
         stage('Build && SonarQube Test') {
             steps {
-                withSonarQubeEnv('SonarQube') {
-                    }
+             withSonarQubeEnv('SonarQube') {
                 }
             }
         }
