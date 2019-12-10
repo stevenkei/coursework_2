@@ -6,12 +6,10 @@
                 git url: 'https://github.com/stevenkei/coursework_2.git'
             }
         }
-        stage('Build && SonarQube Test') {
-            steps {
-                withSonarQubeEnv('SonarQube') {
-                    // Optionally use a Maven environment you've configured already
-                    withMaven(maven:'Maven 3.5') {
-                        sh 'mvn clean package sonar:sonar'
+        stage('Build && SonarQube Test')  {
+    def scannerHome = tool 'SonarScanner';
+    withSonarQubeEnv('SonarQube') { // If you have configured more than one global server connection, you can specify its name
+      sh "${scannerHome}/bin/sonar-scanner"
                     }
                 }
             }
