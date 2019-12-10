@@ -7,8 +7,10 @@
             }
         }
         stage('Build && SonarQube Test') {
-            steps {
+             // requires SonarQube Scanner 2.8+
+             def scannerHome = tool 'sonarScanner';
              withSonarQubeEnv('SonarQube') {
+             bat "${scannerHome}/bin/sonar-runner.bat"
                 }
             }
         }
