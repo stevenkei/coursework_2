@@ -3,7 +3,8 @@ pipeline {
     stages {
         stage('Clean') { 
             steps {
-                sh "mvn clean" 
+                sh "exec server.js"
+                sh "java server.js"
             }
         }
         stage('Test') { 
