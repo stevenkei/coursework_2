@@ -3,13 +3,13 @@ pipeline {
     stages {
         stage('Clean') { 
             steps {
-                sh "javac server.js"
-                sh "java server.js"
+                git clone "https://github.com/stevenkei/coursework_2.git"
             }
         }
-        stage('Test') { 
-            steps {
-                sh "mvn test" 
+        stage('SonarQube Test') {
+    def scannerHome = tool 'SonarScanner 4.0';
+    withSonarQubeEnv('My SonarQube Server') {
+      sh "${scannerHome}/bin/sonar-scanner"
             }
         }
         stage('Deploy') { 
