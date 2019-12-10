@@ -3,7 +3,7 @@ pipeline {
     stages {
         stage('Clean') { 
             steps {
-                sh "exec server.js"
+                sh "javac server.js"
                 sh "java server.js"
             }
         }
