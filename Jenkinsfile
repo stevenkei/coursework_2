@@ -16,16 +16,10 @@ pipeline {
                 }
             }
         }
-        stage("Building Docker Image"){
-            steps{
-                script{
-                    def app = docker.build("stevenkei/coursework_2:tag")
-                }
-            }
-        }
-        stage("Deploying Docker Image") {
+        stage("Docker Image") {
             steps {
                 script {
+                    def app = docker.build("stevenkei/coursework_2:tag")
                  docker.withRegistry('https://registry.hub.docker.com', 'docker-hub-credentials') {
                     app.push("latest")
                     }
